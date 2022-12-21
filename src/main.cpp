@@ -1,7 +1,10 @@
 #include <iostream>
 #include "chainhash.hpp"
 
-void display(ChainHash const& hash) {
+
+using Hash = ChainHash<Hash_Div<std::string, unsigned>>;
+
+void display(Hash const& hash) {
     using namespace std;
     for(int i = 0; i != hash.capacity; ++i) {
         std::cout << i;
@@ -17,7 +20,7 @@ void display(ChainHash const& hash) {
 int main() {
 
     std::vector<std::string> strs{"Hello world!", "Hello dlrow!", "Python is shit", "Linux Manjaro"};
-    ChainHash hash(10);
+    Hash hash(10);
 
     hash.add_item(strs[0]);
     hash.add_item(strs[1]);
