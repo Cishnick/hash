@@ -2,7 +2,8 @@
 #include "chainhash.hpp"
 
 
-using Hash = ChainHash<Hash_Div<std::string, unsigned>>;
+// using Hash = ChainHash<Hash_Div<std::string, unsigned>>;
+using Hash = ChainHash<Hash_Std<std::string, size_t>>;
 
 void display(Hash const& hash) {
     using namespace std;
