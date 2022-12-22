@@ -1,5 +1,5 @@
 #pragma once
-
+#include <functional>
 
 template<class Key, template<class U,class V> class HashFunc>
 class HashSet {
@@ -29,4 +29,6 @@ public:
     virtual void clear() = 0;
 
     virtual void rehash(size_t) = 0;
+
+    virtual void for_each(std::function<Key(Key const&)> const&) = 0
 };
