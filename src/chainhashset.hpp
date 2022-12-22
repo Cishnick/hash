@@ -62,11 +62,9 @@ public:
         return std::find(chain.cbegin(), chain.cend(), item) != chain.cend();
     }
 
-    Key& find_impl(Key const& item) {
-        auto key = HashSet<ChainHashSet, Key, HashFunc>::hash_func(item);
-        auto chain = table[key];
-        // Exception!
-        return *std::find(chain.begin(), chain.end(), item);
+    void replace_impl(Key const& item, Key const& new_item) {
+        remove_item_impl(item);
+        add_item_impl(new_item);
     }
 
     void clear_impl() {

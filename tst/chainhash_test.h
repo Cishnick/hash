@@ -11,7 +11,7 @@ HashSet<Type<Key, Hash_Std>, Key, Hash_Std>* createHashSet(size_t size)
 } 
 
 
-TEST(ChainHashTest, createCount) {
+TEST(HashTest, createCount) {
     auto hash = createHashSet<std::string, ChainHashSet>(10);
 
     ASSERT_EQ(hash->count(), 0);
@@ -19,7 +19,7 @@ TEST(ChainHashTest, createCount) {
     delete hash;
 }
 
-TEST(ChainHashTest, addCount) {
+TEST(HashTest, addCount) {
     auto hash = createHashSet<std::string, ChainHashSet>(10);
 
     hash->add_item("Hello");
@@ -29,7 +29,7 @@ TEST(ChainHashTest, addCount) {
     delete hash;
 }
 
-TEST(ChainHashTest, add_rmCount) {
+TEST(HashTest, add_rmCount) {
     auto hash = createHashSet<std::string, ChainHashSet>(10);
 
     hash->add_item("Hello");
@@ -40,7 +40,7 @@ TEST(ChainHashTest, add_rmCount) {
     delete hash;
 }
 
-TEST(ChainHashTest, containing) {
+TEST(HashTest, containing) {
     auto hash = createHashSet<std::string, ChainHashSet>(10);
 
     hash->add_item("Hello");
@@ -49,5 +49,42 @@ TEST(ChainHashTest, containing) {
     ASSERT_TRUE(hash->containing("World"));
     ASSERT_FALSE(hash->containing("I'm not existing"));  
 
+    delete hash;  
+}
+
+TEST(HashTest, capacity) {
+    auto hash = createHashSet<std::string, ChainHashSet>(10);
+
+    ASSERT_EQ(hash->capacity(), 10);
+    delete hash;  
+}
+
+TEST(HashTest, replace) {
+    auto hash = createHashSet<std::string, ChainHashSet>(10);
+    hash->add_item("Hello");
+    hash->add_item("World");
+
+    hash->replace("World", "People");
+    
+    ASSERT_TRUE(hash->containing("People"));
+    ASSERT_FALSE(hash->containing("World"));
+
+    delete hash;  
+}
+
+TEST(HashTest, for_each) {
+    auto hash = createHashSet<std::string, ChainHashSet>(10);
+    hash->add_item("Hello");
+    hash->add_item("World");
+
+    hash->for_each([](std::string const& val) {
+        return val + '1';
+    });
+    
+    ASSERT_TRUE(hash->containing("Hello1"));
+    ASSERT_TRUE(hash->containing("World1"));
+    ASSERT_FALSE(hash->containing("Hello"));
+    ASSERT_FALSE(hash->containing("World"));
+    
     delete hash;  
 }

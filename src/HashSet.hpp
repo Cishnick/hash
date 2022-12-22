@@ -54,8 +54,8 @@ public:
         return impl()->containing_impl(val);
     }
 
-    Key& find(Key const& val) {
-        return impl()->find_impl(val);
+    void replace(Key const& val, Key const& new_val) {
+        return impl()->replace_impl(val, new_val);
     }
 
     void clear() {
@@ -67,6 +67,6 @@ public:
     }
 
     void for_each(std::function<Key(Key const&)> const& func) {
-        impl()->for_each_impl(func);
+        // impl()->for_each_impl(func);
     }
 };
