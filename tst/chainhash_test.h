@@ -1,15 +1,16 @@
 #include <gtest/gtest.h>
 #include "../src/chainhash.hpp"
 
+using Hash = ChainHash<std::string, Hash_Std>;
 
 TEST(ChainHashTest, createCount) {
-    ChainHash hash(10);
+    Hash hash(10);
 
     ASSERT_EQ(hash.count(), 0);
 }
 
 TEST(ChainHashTest, addCount) {
-    ChainHash hash(10);
+    Hash hash(10);
 
     hash.add_item("Hello");
 
@@ -17,7 +18,7 @@ TEST(ChainHashTest, addCount) {
 }
 
 TEST(ChainHashTest, add_rmCount) {
-    ChainHash hash(10);
+    Hash hash(10);
 
     hash.add_item("Hello");
     hash.remove_item("Hello");
@@ -26,7 +27,7 @@ TEST(ChainHashTest, add_rmCount) {
 }
 
 TEST(ChainHashTest, containing) {
-    ChainHash hash(10);
+    Hash hash(10);
 
     hash.add_item("Hello");
     hash.add_item("World");

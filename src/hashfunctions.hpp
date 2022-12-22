@@ -4,6 +4,9 @@
 #include <numeric>
 #include <functional>
 
+
+
+
 template <class T, class U>
 class Hash_Div {
 public:
@@ -24,7 +27,6 @@ public:
         return Hash_Div<U, U>::get(sum, size);
     }
 };
-
 
 template <class T, class U>
 class Hash_Std {
