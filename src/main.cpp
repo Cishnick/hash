@@ -7,7 +7,7 @@ using Hash = ChainHash<std::string, Hash_Std>;
 
 void display(Hash const& hash) {
     using namespace std;
-    for(int i = 0; i != hash.capacity; ++i) {
+    for(int i = 0; i != hash._capacity; ++i) {
         std::cout << i;
         for(auto const& x : hash.table[i]) {
             std::cout << " --> " << x;
