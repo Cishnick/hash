@@ -5,8 +5,6 @@
 #include <functional>
 
 
-
-
 template <class T, class U>
 class Hash_Div {
 public:
@@ -16,6 +14,7 @@ public:
         return val % size;
     }
 };
+
 
 template <class U>
 class Hash_Div<std::string, U> {
@@ -27,6 +26,7 @@ public:
         return Hash_Div<U, U>::get(sum, size);
     }
 };
+
 
 template <class T, class U>
 class Hash_Std {

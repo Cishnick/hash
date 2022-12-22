@@ -9,35 +9,35 @@
 #include "HashSet.hpp"
 
 template<class Key, template<class U,class V> class HashFunc>
-class ChainHash : public HashSet<ChainHash<Key, HashFunc>, Key, HashFunc>
+class ChainHashSet : public HashSet<ChainHashSet<Key, HashFunc>, Key, HashFunc>
 {
 public:
-    explicit ChainHash(size_t size) :
+    explicit ChainHashSet(size_t size) :
         _capacity(size),
         _count(0)
     {
         table = new std::list<Key>[_capacity];
     }
 
-    ~ChainHash() {
+    ~ChainHashSet() {
         delete[] table;
     }
 
     void add_item_impl(Key const &item) {
         _count++;
-        auto key = HashSet<ChainHash, Key, HashFunc>::hash_func(item);
+        auto key = HashSet<ChainHashSet, Key, HashFunc>::hash_func(item);
         table[key].push_back(item);
     }
 
     void add_item_impl(Key && item) {
         _count++;
-        auto key = HashSet<ChainHash, Key, HashFunc>::hash_func(item);
+        auto key = HashSet<ChainHashSet, Key, HashFunc>::hash_func(item);
         table[key].push_back(std::forward<Key>(item));
     }
 
     void remove_item_impl(Key const &item)  {
         _count--;
-        auto key = HashSet<ChainHash, Key, HashFunc>::hash_func(item);
+        auto key = HashSet<ChainHashSet, Key, HashFunc>::hash_func(item);
         table[key].remove(item);
     }
 
@@ -57,13 +57,13 @@ public:
     }
 
     bool containing_impl(Key const &item) const {
-        auto key = HashSet<ChainHash, Key, HashFunc>::hash_func(item);
+        auto key = HashSet<ChainHashSet, Key, HashFunc>::hash_func(item);
         auto chain = table[key];
         return std::find(chain.cbegin(), chain.cend(), item) != chain.cend();
     }
 
     Key& find_impl(Key const& item) {
-        auto key = HashSet<ChainHash, Key, HashFunc>::hash_func(item);
+        auto key = HashSet<ChainHashSet, Key, HashFunc>::hash_func(item);
         auto chain = table[key];
         // Exception!
         return *std::find(chain.begin(), chain.end(), item);
@@ -86,7 +86,7 @@ public:
     }
 
 
-    friend void display(ChainHash const &hash);
+    friend void display(ChainHashSet const &hash);
 
 private:
     std::list<std::string> *table;

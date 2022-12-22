@@ -1,8 +1,8 @@
 #include <iostream>
-#include "chainhash.hpp"
+#include "chainhashset.hpp"
 
 
-using Hash = ChainHash<std::string, Hash_Std>;
+using Hash = ChainHashSet<std::string, Hash_Std>;
 
 void display(Hash const& hash) {
     using namespace std;
