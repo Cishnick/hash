@@ -20,13 +20,18 @@ void display(Hash const& hash) {
 
 int main() {
 
-    std::vector<std::string> strs{"Hello world!", "Hello dlrow!", "Python is shit", "Linux Manjaro"};
+    std::vector<std::string> strs{
+        "Hello world!", 
+        "Hello dlrow!", 
+        "Python is shit", 
+        "Linux Manjaro",
+        "Something else",
+        "First try in hash tables"
+    };
     Hash hash(10);
 
-    hash.add_item(strs[0]);
-    hash.add_item(strs[1]);
-    hash.add_item(strs[2]);
-    hash.add_item(strs[3]);
+    for(auto const& str : strs)
+        hash.add_item(str);
 
     display(hash);
     std::cout << std::endl;
