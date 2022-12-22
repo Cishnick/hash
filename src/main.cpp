@@ -2,7 +2,6 @@
 #include "chainhash.hpp"
 
 
-// using Hash = ChainHash<Hash_Div<std::string, unsigned>>;
 using Hash = ChainHash<std::string, Hash_Std>;
 
 void display(Hash const& hash) {
@@ -35,7 +34,6 @@ int main() {
 
     display(hash);
     std::cout << std::endl;
-
 
     hash.remove_item(strs[0]);
     hash.remove_item(strs[3]);

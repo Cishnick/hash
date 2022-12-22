@@ -8,8 +8,11 @@
 
 #include "HashSet.hpp"
 
-template<class Key, template<class U,class V> class HashFunc>
-class ChainHash : public HashSet<Key, HashFunc>
+template<
+    class Key, 
+    template<class U,class V> class HashFunc
+    >
+class ChainHash : public HashSet<ChainHash<Key, HashFunc>, Key, HashFunc>
 {
 public:
     explicit ChainHash(size_t size) :
@@ -23,62 +26,62 @@ public:
         delete[] table;
     }
 
-    virtual void add_item(Key const &item) override{
+    void add_item_impl(Key const &item) {
         _count++;
-        auto key = HashSet<Key, HashFunc>::hash_func(item);
+        auto key = HashSet<ChainHash, Key, HashFunc>::hash_func(item);
         table[key].push_back(item);
     }
 
-    virtual void add_item(Key && item) override{
+    void add_item_impl(Key && item) {
         _count++;
-        auto key = HashSet<Key, HashFunc>::hash_func(item);
+        auto key = HashSet<ChainHash, Key, HashFunc>::hash_func(item);
         table[key].push_back(std::forward<Key>(item));
     }
 
-    virtual void remove_item(Key const &item) override {
+    void remove_item_impl(Key const &item)  {
         _count--;
-        auto key = HashSet<Key, HashFunc>::hash_func(item);
+        auto key = HashSet<ChainHash, Key, HashFunc>::hash_func(item);
         table[key].remove(item);
     }
 
-    virtual size_t count() const override
+    size_t count_impl() const 
     {
         return _count;
     }
 
-    virtual size_t capacity() const override
+    size_t capacity_impl() const 
     {
         return _capacity;
     }
 
-    virtual bool empty() const override
+    bool empty_impl() const 
     {
         return _count == 0;
     }
 
-    virtual bool containing(Key const &item) const override {
-        auto key = HashSet<Key, HashFunc>::hash_func(item);
+    bool containing_impl(Key const &item) const {
+        auto key = HashSet<ChainHash, Key, HashFunc>::hash_func(item);
         auto chain = table[key];
         return std::find(chain.cbegin(), chain.cend(), item) != chain.cend();
     }
 
-    virtual Key& find(Key const& item) override {
-        auto key = HashSet<Key, HashFunc>::hash_func(item);
+    Key& find_impl(Key const& item) {
+        auto key = HashSet<ChainHash, Key, HashFunc>::hash_func(item);
         auto chain = table[key];
         // Exception!
         return *std::find(chain.begin(), chain.end(), item);
     }
 
-    virtual void clear() override {
+    void clear_impl() {
         for(auto bucket = table; bucket != table + _capacity; ++bucket)
             bucket->clear();
     }
 
-    virtual void rehash(size_t) {
+    void rehash_impl(size_t) {
         
     }
 
-    virtual void for_each(std::function<Key(Key const&)> const& func) override {
+    void for_each_impl(std::function<Key(Key const&)> const& func) {
         for(auto bucket = table; bucket != table + _capacity; ++bucket) {
             for(auto& item : *bucket)
                 item = func(item);
