@@ -6,7 +6,6 @@
 #include <string>
 #include "hashfunctions.hpp"
 
-
 template<class T, template<class U,class V> class HashFunc>
 class ChainHash
 {
@@ -25,13 +24,13 @@ public:
         delete[] table;
     }
 
-    void add_item(std::string const &item){
+    void add_item(T const &item){
         _count++;
         auto key = hash_func(item);
         table[key].push_back(item);
     }
 
-    void remove_item(std::string const &item){
+    void remove_item(T const &item){
         _count--;
         auto key = hash_func(item);
         table[key].remove(item);
@@ -42,7 +41,7 @@ public:
         return _count;
     }
 
-    bool containing(std::string const &item) const {
+    bool containing(T const &item) const {
         auto key = hash_func(item);
         auto chain = table[key];
         return std::find(chain.cbegin(), chain.cend(), item) != chain.cend();
