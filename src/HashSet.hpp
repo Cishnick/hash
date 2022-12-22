@@ -17,8 +17,8 @@ private:
     inline const Impl* impl() const{
         return static_cast<const Impl*>(this);
     }
-protected:
 
+protected:
     hash_t hash_func(Key const &data) const {
         return _HashFunc::get(data, capacity());
     }

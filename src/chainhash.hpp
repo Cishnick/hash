@@ -8,10 +8,7 @@
 
 #include "HashSet.hpp"
 
-template<
-    class Key, 
-    template<class U,class V> class HashFunc
-    >
+template<class Key, template<class U,class V> class HashFunc>
 class ChainHash : public HashSet<ChainHash<Key, HashFunc>, Key, HashFunc>
 {
 public:
