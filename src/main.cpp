@@ -3,7 +3,7 @@
 
 
 // using Hash = ChainHash<Hash_Div<std::string, unsigned>>;
-using Hash = ChainHash<Hash_Std<std::string, size_t>>;
+using Hash = ChainHash<std::string, Hash_Std>;
 
 void display(Hash const& hash) {
     using namespace std;

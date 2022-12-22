@@ -6,9 +6,13 @@
 #include <string>
 #include "hashfunctions.hpp"
 
-template<class HashFunc>
+
+template<class T, template<class U,class V> class HashFunc>
 class ChainHash
 {
+    using hash_t = size_t;
+    using _HashFunc = HashFunc<T, hash_t>;
+
 public:
     explicit ChainHash(size_t size) :
         capacity(size),
@@ -47,10 +51,8 @@ public:
     friend void display(ChainHash const &hash);
 
 private:
-    using hash_t = unsigned long;
-
-    hash_t hash_func(std::string const &data) const {
-        return HashFunc::get(data, capacity);
+    hash_t hash_func(T const &data) const {
+        return _HashFunc::get(data, capacity);
     }
 
     std::list<std::string> *table;
