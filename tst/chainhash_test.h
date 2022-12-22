@@ -19,29 +19,35 @@ TEST(ChainHashTest, createCount) {
     delete hash;
 }
 
-// TEST(ChainHashTest, addCount) {
-//     Hash hash(10);
+TEST(ChainHashTest, addCount) {
+    auto hash = createHashSet<std::string, ChainHashSet>(10);
 
-//     hash.add_item("Hello");
+    hash->add_item("Hello");
 
-//     ASSERT_EQ(hash.count(), 1);
-// }
+    ASSERT_EQ(hash->count(), 1);
 
-// TEST(ChainHashTest, add_rmCount) {
-//     Hash hash(10);
+    delete hash;
+}
 
-//     hash.add_item("Hello");
-//     hash.remove_item("Hello");
+TEST(ChainHashTest, add_rmCount) {
+    auto hash = createHashSet<std::string, ChainHashSet>(10);
 
-//     ASSERT_EQ(hash.count(), 0);
-// }
+    hash->add_item("Hello");
+    hash->remove_item("Hello");
 
-// TEST(ChainHashTest, containing) {
-//     Hash hash(10);
+    ASSERT_EQ(hash->count(), 0);
 
-//     hash.add_item("Hello");
-//     hash.add_item("World");
+    delete hash;
+}
 
-//     ASSERT_TRUE(hash.containing("World"));
-//     ASSERT_FALSE(hash.containing("I'm not existing"));    
-// }
+TEST(ChainHashTest, containing) {
+    auto hash = createHashSet<std::string, ChainHashSet>(10);
+
+    hash->add_item("Hello");
+    hash->add_item("World");
+
+    ASSERT_TRUE(hash->containing("World"));
+    ASSERT_FALSE(hash->containing("I'm not existing"));  
+
+    delete hash;  
+}
