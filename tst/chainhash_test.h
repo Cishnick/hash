@@ -88,3 +88,18 @@ TEST(HashTest, for_each) {
     
     delete hash;  
 }
+
+TEST(HashTest, rehash) {
+    auto hash = createHashSet<std::string, ChainHashSet>(10);
+    hash->add_item("Hello");
+    hash->add_item("World");
+
+    hash->rehash(15);
+    
+    ASSERT_TRUE(hash->containing("Hello"));
+    ASSERT_TRUE(hash->containing("World"));
+    ASSERT_EQ(hash->count(), 2);
+    ASSERT_EQ(hash->capacity(), 15);
+    
+    delete hash;  
+}

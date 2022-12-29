@@ -19,6 +19,9 @@ public:
         table = new std::list<Key>[_capacity];
     }
 
+    ChainHashSet(ChainHashSet<Key, HashFunc> const& obj) = delete;
+    ChainHashSet(ChainHashSet<Key, HashFunc> && obj) = default;
+
     ~ChainHashSet() {
         delete[] table;
     }
@@ -72,8 +75,14 @@ public:
             bucket->clear();
     }
 
-    void rehash_impl(size_t) {
+    void rehash_impl(size_t cap) {
+        auto hash = ChainHashSet<Key, HashFunc>(cap);
         
+        for(auto bucket = table; bucket != table + _capacity; ++bucket) {
+            for(auto& item : *bucket)
+                hash.add_item_impl(item);
+        }
+        std::swap(*this, hash);
     }
 
     void for_each_impl(std::function<Key(Key const&)> const& func) {
@@ -81,6 +90,7 @@ public:
             for(auto& item : *bucket)
                 item = func(item);
         }
+        rehash_impl(_capacity);
     }
 
 
