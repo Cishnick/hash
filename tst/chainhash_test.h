@@ -103,3 +103,22 @@ TEST(HashTest, rehash) {
     
     delete hash;  
 }
+
+TEST(HashTest, copyconstr) {
+    auto hash = createHashSet<std::string, ChainHashSet>(10);
+    
+    hash->add_item("Hello");
+    hash->add_item("World");
+
+    auto chash(*hash);
+    
+    auto count = chash.count();
+    // auto count = hash->count();
+
+    // ASSERT_TRUE(chash.containing("Hello"));
+    // ASSERT_TRUE(chash.containing("World"));
+    ASSERT_EQ(count, 2);
+    // ASSERT_EQ(chash.capacity(), 15);
+    
+    delete hash;  
+}

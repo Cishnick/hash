@@ -12,19 +12,78 @@
 template<class Key, template<class U,class V> class HashFunc>
 class ChainHashSet : public HashSet<ChainHashSet<Key, HashFunc>, Key, HashFunc>
 {
+private:
+    ChainHashSet() :
+        _capacity(0),
+        _count(0),
+        table(nullptr)
+    {}
+    
+
 public:
+    
+    void swap(ChainHashSet& other) noexcept {
+        std::swap(this->_capacity, other._capacity);
+        std::swap(this->_count, other._count);
+        std::swap(this->table, other.table);
+    }
+    
     explicit ChainHashSet(size_t size) :
         _capacity(size),
-        _count(0)
+        _count(0),
+        table(new std::list<Key>[size])
     {
-        table = new std::list<Key>[_capacity];
     }
 
-    ChainHashSet(ChainHashSet<Key, HashFunc> const& obj) = delete;
-    ChainHashSet(ChainHashSet<Key, HashFunc> && obj) = default;
+    ChainHashSet clone() {
+        return *this;
+    }
+
+    ChainHashSet(ChainHashSet<Key, HashFunc> const& obj) : 
+        _capacity(obj._capacity),
+        _count(obj._count),
+        table(new std::list<Key>[obj._capacity])
+    {
+        std::cout << "copy";
+        auto ptable = table;
+        for(auto bucket = obj.table; bucket != obj.table + obj._capacity; ++bucket, ++ptable) {
+            *ptable = *bucket;
+        }
+    }
+
+    ChainHashSet(ChainHashSet<Key, HashFunc> && obj) :
+        ChainHashSet()
+    {
+        std::cout << "move";
+        this->swap(obj);
+    }
+
+    ChainHashSet<Key, HashFunc>& operator=(ChainHashSet<Key, HashFunc> other) {
+        std::cout << "copy";
+        if(this == &other)
+            return *this;
+
+        this->swap(other);
+
+        return *this;
+    }
+
+    ChainHashSet<Key, HashFunc>& operator=(ChainHashSet<Key, HashFunc>&& other) {
+        std::cout << "move";
+        if(this == &other)
+            return *this;
+
+        ChainHashSet<Key, HashFunc> swap_obj;
+        this->swap(swap_obj);
+
+        this->swap(other);
+
+        return *this;        
+    }
 
     ~ChainHashSet() {
-        delete[] table;
+        if(table)
+            delete[] table;
     }
 
     void add_item_impl(Key const &item) {
@@ -82,7 +141,6 @@ public:
         std::swap(swap_table, this->table);
         std::swap(_capacity, cap);
         _count = 0;
-
 
         for(auto bucket = swap_table; bucket != swap_table + cap; ++bucket) {
             for(auto& item : *bucket)

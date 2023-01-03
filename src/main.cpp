@@ -17,30 +17,61 @@ void display(Hash const& hash) {
 }
 
 
+template <class Key, template<class T, template<class U,class V> class HashFunc> class Type>
+HashSet<Type<Key, Hash_Std>, Key, Hash_Std>* createHashSet(size_t size) 
+{
+    return new Type<Key, Hash_Std>(size);
+} 
+
+
 int main() {
 
-    std::vector<std::string> strs{
-        "Hello world!", 
-        "Hello dlrow!", 
-        "Python is shit", 
-        "Linux Manjaro",
-        "Something else",
-        "First try in hash tables"
-    };
-    Hash hash(10);
+    // std::vector<std::string> strs{
+    //     "Hello world!", 
+    //     "Hello dlrow!", 
+    //     "Python is shit", 
+    //     "Linux Manjaro",
+    //     "Something else",
+    //     "First try in hash tables"
+    // };
+    // Hash hash(10);
 
-    for(auto const& str : strs)
-        hash.add_item(str);
+    // for(auto const& str : strs)
+    //     hash.add_item(str);
 
-    display(hash);
-    std::cout << std::endl;
+    // display(hash);
+    // std::cout << std::endl;
     
-    hash.for_each([](std::string const& val) {
-        return val + '1';
-    });
-    
+    // hash.for_each([](std::string const& val) {
+    //     return val + '1';
+    // });
 
-    display(hash);
+    
+    // auto chash(hash);
+    
+    // std::cout << chash.count() << std::endl;
+
+    // display(chash);
+
+
+    auto hash = createHashSet<std::string, ChainHashSet>(10);
+    
+    hash->add_item("Hello");
+    hash->add_item("World");
+
+    auto chash(hash->clone());
+    
+    // auto count = chash.count();
+
+    display(*static_cast<Hash*>(&chash));
+    // auto count = hash->count();
+
+    // ASSERT_TRUE(chash.containing("Hello"));
+    // ASSERT_TRUE(chash.containing("World"));
+    // ASSERT_EQ(count, 2);
+    // ASSERT_EQ(chash.capacity(), 15);
+    
+    delete hash;  
 
     return 0;
 }

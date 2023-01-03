@@ -23,8 +23,19 @@ protected:
         return _HashFunc::get(data, capacity());
     }
 
+    HashSet() = default;
+    HashSet(const HashSet& obj) = default;
+    HashSet& operator=(HashSet const& obj) = default;
+    HashSet& operator=(HashSet&& obj) = default;
+
 public:
     virtual ~HashSet() = default;
+    
+    HashSet clone() {
+        auto temp(*impl());
+        
+        return temp;
+    }
 
     void add_item(Key const& val) {
         impl()->add_item_impl(val);
