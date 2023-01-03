@@ -5,6 +5,7 @@
 #include <vector>
 #include <string>
 #include "hashfunctions.hpp"
+#include <iostream>
 
 #include "HashSet.hpp"
 
@@ -76,13 +77,19 @@ public:
     }
 
     void rehash_impl(size_t cap) {
-        auto hash = ChainHashSet<Key, HashFunc>(cap);
-        
-        for(auto bucket = table; bucket != table + _capacity; ++bucket) {
+        auto new_table = new std::list<std::string>[cap];
+
+        std::swap(new_table, this->table);
+        std::swap(_capacity, cap);
+        _count = 0;
+
+
+        for(auto bucket = new_table; bucket != new_table + cap; ++bucket) {
             for(auto& item : *bucket)
-                hash.add_item_impl(item);
+                this->add_item_impl(item);
         }
-        std::swap(*this, hash);
+
+        delete [] new_table;
     }
 
     void for_each_impl(std::function<Key(Key const&)> const& func) {
@@ -97,7 +104,8 @@ public:
     friend void display(ChainHashSet const &hash);
 
 private:
+
     std::list<std::string> *table;
-    const unsigned _capacity = 10000;
-    unsigned _count;
+    size_t _capacity = 10000;
+    size_t _count;
 };

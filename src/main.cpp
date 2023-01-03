@@ -34,9 +34,11 @@ int main() {
 
     display(hash);
     std::cout << std::endl;
-
-    hash.remove_item(strs[0]);
-    hash.remove_item(strs[3]);
+    
+    hash.for_each([](std::string const& val) {
+        return val + '1';
+    });
+    
 
     display(hash);
 

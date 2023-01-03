@@ -67,6 +67,6 @@ public:
     }
 
     void for_each(std::function<Key(Key const&)> const& func) {
-        // impl()->for_each_impl(func);
+        impl()->for_each_impl(func);
     }
 };
