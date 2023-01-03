@@ -77,19 +77,19 @@ public:
     }
 
     void rehash_impl(size_t cap) {
-        auto new_table = new std::list<std::string>[cap];
+        auto swap_table = new std::list<std::string>[cap];
 
-        std::swap(new_table, this->table);
+        std::swap(swap_table, this->table);
         std::swap(_capacity, cap);
         _count = 0;
 
 
-        for(auto bucket = new_table; bucket != new_table + cap; ++bucket) {
+        for(auto bucket = swap_table; bucket != swap_table + cap; ++bucket) {
             for(auto& item : *bucket)
                 this->add_item_impl(item);
         }
 
-        delete [] new_table;
+        delete [] swap_table;
     }
 
     void for_each_impl(std::function<Key(Key const&)> const& func) {
