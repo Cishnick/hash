@@ -1,0 +1,61 @@
+Start testing: Jan 02 17:43 Novosibirsk Standard Time
+----------------------------------------------------------
+1/1 Testing: Hash_tstg
+1/1 Test: Hash_tstg
+Command: "C:/myCode/Hash/build/tst/Hash_tst.exe"
+Directory: C:/myCode/Hash/build/tst
+"Hash_tstg" start time: Jan 02 17:43 Novosibirsk Standard Time
+Output:
+----------------------------------------------------------
+[==========] Running 9 tests from 2 test suites.
+[----------] Global test environment set-up.
+[----------] 1 test from HelloTest
+[ RUN      ] HelloTest.BasicAssertions
+[       OK ] HelloTest.BasicAssertions (0 ms)
+[----------] 1 test from HelloTest (0 ms total)
+
+[----------] 8 tests from HashTest
+[ RUN      ] HashTest.createCount
+[       OK ] HashTest.createCount (0 ms)
+[ RUN      ] HashTest.addCount
+[       OK ] HashTest.addCount (0 ms)
+[ RUN      ] HashTest.add_rmCount
+[       OK ] HashTest.add_rmCount (0 ms)
+[ RUN      ] HashTest.containing
+[       OK ] HashTest.containing (0 ms)
+[ RUN      ] HashTest.capacity
+[       OK ] HashTest.capacity (0 ms)
+[ RUN      ] HashTest.replace
+[       OK ] HashTest.replace (0 ms)
+[ RUN      ] HashTest.for_each
+C:\myCode\Hash\hash\tst\chainhash_test.h:84: Failure
+Value of: hash->containing("Hello1")
+  Actual: false
+Expected: true
+[  FAILED  ] HashTest.for_each (0 ms)
+[ RUN      ] HashTest.rehash
+C:\myCode\Hash\hash\tst\chainhash_test.h:102: Failure
+Expected equality of these values:
+  hash->capacity()
+    Which is: 10
+  15
+[  FAILED  ] HashTest.rehash (0 ms)
+[----------] 8 tests from HashTest (0 ms total)
+
+[----------] Global test environment tear-down
+[==========] 9 tests from 2 test suites ran. (0 ms total)
+[  PASSED  ] 7 tests.
+[  FAILED  ] 2 tests, listed below:
+[  FAILED  ] HashTest.for_each
+[  FAILED  ] HashTest.rehash
+
+ 2 FAILED TESTS
+<end of output>
+Test time =   0.04 sec
+----------------------------------------------------------
+Test Failed.
+"Hash_tstg" end time: Jan 02 17:43 Novosibirsk Standard Time
+"Hash_tstg" time elapsed: 00:00:00
+----------------------------------------------------------
+
+End testing: Jan 02 17:43 Novosibirsk Standard Time
