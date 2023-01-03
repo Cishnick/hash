@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Site BuildName="Win32-mingw32-make"
+	BuildStamp="20230102-1043-Experimental"
+	Name="DESKTOP-TRMT6H7"
+	Generator="ctest-3.20.2"
+	CompilerName="C:/Qt/Tools/mingw810_64/bin/x86_64-w64-mingw32-g++.exe"
+	CompilerVersion="8.1.0"
+	OSName="Windows"
+	Hostname="DESKTOP-TRMT6H7"
+	OSRelease=" Personal"
+	OSVersion=" (Build 22000)"
+	OSPlatform="AMD64"
+	Is64Bits="1"
+	VendorString="GenuineIntel"
+	VendorID="Intel Corporation"
+	FamilyID="6"
+	ModelID="5"
+	ProcessorCacheSize="-1"
+	NumberOfLogicalCPU="8"
+	NumberOfPhysicalCPU="4"
+	TotalVirtualMemory="23857"
+	TotalPhysicalMemory="7985"
+	LogicalProcessorsPerPhysical="2"
+	ProcessorClockFrequency="2496"
+	>
+	<Testing>
+		<StartDateTime>Jan 02 17:43 Novosibirsk Standard Time</StartDateTime>
+		<StartTestTime>1672656219</StartTestTime>
+		<TestList>
+			<Test>./tst/Hash_tstg</Test>
+		</TestList>
+		<Test Status="failed">
+			<Name>Hash_tstg</Name>
+			<Path>./tst</Path>
+			<FullName>./tst/Hash_tstg</FullName>
+			<FullCommandLine>C:\myCode\Hash\build\tst\Hash_tst.exe</FullCommandLine>
+			<Results>
+				<NamedMeasurement type="text/string" name="Exit Code">
+					<Value>Failed</Value>
+				</NamedMeasurement>
+				<NamedMeasurement type="text/string" name="Exit Value">
+					<Value>1</Value>
+				</NamedMeasurement>
+				<NamedMeasurement type="numeric/double" name="Execution Time">
+					<Value>0.0407737</Value>
+				</NamedMeasurement>
+				<NamedMeasurement type="numeric/double" name="Processors">
+					<Value>1</Value>
+				</NamedMeasurement>
+				<NamedMeasurement type="text/string" name="Completion Status">
+					<Value>Completed</Value>
+				</NamedMeasurement>
+				<NamedMeasurement type="text/string" name="Command Line">
+					<Value>C:\myCode\Hash\build\tst\Hash_tst.exe</Value>
+				</NamedMeasurement>
+				<NamedMeasurement type="text/string" name="Environment">
+					<Value>#CTEST_RESOURCE_GROUP_COUNT=</Value>
+				</NamedMeasurement>
+				<Measurement>
+					<Value encoding="base64" compression="gzip">eJyNVMtu2zAQvPMrFjnZQCxYQYOmBFLAdZ2maNEUsdMebMNgqFVFgCJdksrj70NKsh0HemQPEpY7HM4sH8vLfazhtlBKqH/wCRxaZyE1OoezMgFbCP+PyHK0jzV8k/qeyQqA6kEYrXJUHoxuVGzfgOMKV5Jeo5R64VOyhNu7X1DG+jAcfWFW8Im1aJzQynpYFTc/umAwGENuh+9Yt0KC047JITmecPHa/jWzWYPQejTiBpnDqS6Ue6OxAbGX10jFkqSLZ1fuJdmYvIdnh+im4lo5JsKBaHO2B/QQsS3jwj230dTlbhKDW8k4tnDU1W6KVJsNMp6RKV3lz1Od4CrUVln4OOtWPPN2QrYJByDK6MUHCldMyMIg+cNkgaBTCgEx+nxwPzgpj1V8MiQAE+4KJimkTFoks6ctcocJBWeKUvzV5PvP2ddGXX0NCOu+X3s8PjuI3+kA/O/VhWbrFFyGFuEh+LLUS6991dsxCG4A/mbCKxOWQjz2A/F5i4lKXuMFbLxPXRew7VlxyMwo0Y+KLF8/W+3PFRimouOVvPrfk/m8Uv+xmhkde6oo7ClIYUPP7lHqR9qzeZ1tIcST1tXFbL6YkxcZV6wx====</Value>
+				</Measurement>
+			</Results>
+		</Test>
+		<EndDateTime>Jan 02 17:43 Novosibirsk Standard Time</EndDateTime>
+		<EndTestTime>1672656219</EndTestTime>
+		<ElapsedMinutes>0</ElapsedMinutes>
+	</Testing>
+</Site>

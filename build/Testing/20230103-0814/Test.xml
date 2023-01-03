@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Site BuildName="Win32-mingw32-make"
+	BuildStamp="20230103-0814-Experimental"
+	Name="DESKTOP-TRMT6H7"
+	Generator="ctest-3.20.2"
+	CompilerName="C:/Qt/Tools/mingw810_64/bin/x86_64-w64-mingw32-g++.exe"
+	CompilerVersion="8.1.0"
+	OSName="Windows"
+	Hostname="DESKTOP-TRMT6H7"
+	OSRelease=" Personal"
+	OSVersion=" (Build 22000)"
+	OSPlatform="AMD64"
+	Is64Bits="1"
+	VendorString="GenuineIntel"
+	VendorID="Intel Corporation"
+	FamilyID="6"
+	ModelID="5"
+	ProcessorCacheSize="-1"
+	NumberOfLogicalCPU="8"
+	NumberOfPhysicalCPU="4"
+	TotalVirtualMemory="23857"
+	TotalPhysicalMemory="7985"
+	LogicalProcessorsPerPhysical="2"
+	ProcessorClockFrequency="2496"
+	>
+	<Testing>
+		<StartDateTime>Jan 03 15:29 Novosibirsk Standard Time</StartDateTime>
+		<StartTestTime>1672734589</StartTestTime>
+		<TestList>
+			<Test>./tst/Hash_tstg</Test>
+		</TestList>
+		<Test Status="passed">
+			<Name>Hash_tstg</Name>
+			<Path>./tst</Path>
+			<FullName>./tst/Hash_tstg</FullName>
+			<FullCommandLine>C:\myCode\Hash\build\tst\Hash_tst.exe</FullCommandLine>
+			<Results>
+				<NamedMeasurement type="numeric/double" name="Execution Time">
+					<Value>0.0318086</Value>
+				</NamedMeasurement>
+				<NamedMeasurement type="numeric/double" name="Processors">
+					<Value>1</Value>
+				</NamedMeasurement>
+				<NamedMeasurement type="text/string" name="Completion Status">
+					<Value>Completed</Value>
+				</NamedMeasurement>
+				<NamedMeasurement type="text/string" name="Command Line">
+					<Value>C:\myCode\Hash\build\tst\Hash_tst.exe</Value>
+				</NamedMeasurement>
+				<NamedMeasurement type="text/string" name="Environment">
+					<Value>#CTEST_RESOURCE_GROUP_COUNT=</Value>
+				</NamedMeasurement>
+				<Measurement>
+					<Value encoding="base64" compression="gzip">eJyNlD1vwjAQhvf8ihvLgAWoQzt0oB8qUqW2AjpFCBnnaCw5vsh2oPz7OgmkgOKkt8T2vff4dXR2/NDECuaF1lJ/wz04tM7C1lAGk2oCtpD+y6J42MQKXhVtuKoFqHfSkM5QezG6YZFfice1roLOUCla+mkUw/zrHapY/S2zR26lmFqLxknS1svq+HjrksHNCDI7+Me+tRIcOa4G0WXB3fnxZ9ymLUaPq0wY5A6fqNDuymOLorHXiuJJ0sU5pXsha5P1cE6KbpQg7bgsGyJ0skbQA+I5F9IdQphjuhtiMFdcYIBxzHYjtmTWyEUaYJzSfT5SPwzaKJOtXdjaVF1dGLpbDrkZJrTXUXx+d8N3FgzX7HIn7/5zuli8PANjLFqmCKbU0xacH1e1VLi8cLDnvh4z2mECVmr/i6W38yMQE1uLU1+akkrK6vFocgubQ/VQ/AKlQ1BX====</Value>
+				</Measurement>
+			</Results>
+		</Test>
+		<EndDateTime>Jan 03 15:29 Novosibirsk Standard Time</EndDateTime>
+		<EndTestTime>1672734589</EndTestTime>
+		<ElapsedMinutes>0</ElapsedMinutes>
+	</Testing>
+</Site>
