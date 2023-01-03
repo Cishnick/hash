@@ -1,2 +1,0 @@
-C:\Qt\Tools\mingw810_64\bin\ar.exe qc libHash_lib.a CMakeFiles/Hash_lib.dir/main.cpp.obj
-C:\Qt\Tools\mingw810_64\bin\ranlib.exe libHash_lib.a
