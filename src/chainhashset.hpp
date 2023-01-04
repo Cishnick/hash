@@ -19,9 +19,7 @@ private:
         table(nullptr)
     {}
     
-
-public:
-    
+public:    
     void swap(ChainHashSet& other) noexcept {
         std::swap(this->_capacity, other._capacity);
         std::swap(this->_count, other._count);
@@ -44,7 +42,6 @@ public:
         _count(obj._count),
         table(new std::list<Key>[obj._capacity])
     {
-        std::cout << "copy";
         auto ptable = table;
         for(auto bucket = obj.table; bucket != obj.table + obj._capacity; ++bucket, ++ptable) {
             *ptable = *bucket;
@@ -54,12 +51,10 @@ public:
     ChainHashSet(ChainHashSet<Key, HashFunc> && obj) :
         ChainHashSet()
     {
-        std::cout << "move";
         this->swap(obj);
     }
 
     ChainHashSet<Key, HashFunc>& operator=(ChainHashSet<Key, HashFunc> other) {
-        std::cout << "copy";
         if(this == &other)
             return *this;
 
@@ -69,7 +64,6 @@ public:
     }
 
     ChainHashSet<Key, HashFunc>& operator=(ChainHashSet<Key, HashFunc>&& other) {
-        std::cout << "move";
         if(this == &other)
             return *this;
 
@@ -158,11 +152,9 @@ public:
         rehash_impl(_capacity);
     }
 
-
     friend void display(ChainHashSet const &hash);
 
 private:
-
     std::list<std::string> *table;
     size_t _capacity = 10000;
     size_t _count;

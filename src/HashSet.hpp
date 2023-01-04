@@ -7,7 +7,6 @@ protected:
     using hash_t = size_t;
     
 private:
-
     using _HashFunc = HashFunc<Key, hash_t>;
 
     inline Impl* impl() {
