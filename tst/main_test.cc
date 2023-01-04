@@ -1,7 +1,7 @@
 #include <gtest/gtest.h>
 #include "base_test.h"
 #include "chainhash_test.h"
-
+#include "doublehashset_test.h"
 
 
 int main(int argc, char** argv)

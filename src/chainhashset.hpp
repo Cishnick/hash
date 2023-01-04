@@ -5,7 +5,6 @@
 #include <vector>
 #include <string>
 #include "hashfunctions.hpp"
-#include <iostream>
 
 #include "HashSet.hpp"
 
@@ -156,6 +155,6 @@ public:
 
 private:
     std::list<std::string> *table;
-    size_t _capacity = 10000;
+    size_t _capacity;
     size_t _count;
 };

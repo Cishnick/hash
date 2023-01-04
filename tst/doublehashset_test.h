@@ -1,8 +1,7 @@
 #include <gtest/gtest.h>
-#include "../src/chainhashset.hpp"
+#include "../src/doublehashset.hpp"
 
-using Hash = ChainHashSet<std::string, Hash_Std>;
-
+using Hash = DoubleHashSet<std::string, Hash_Std>;
 
 template <class Key, template<class T, template<class U,class V> class HashFunc> class Type>
 HashSet<Type<Key, Hash_Std>, Key, Hash_Std>* createHashSet(size_t size) 
@@ -11,7 +10,7 @@ HashSet<Type<Key, Hash_Std>, Key, Hash_Std>* createHashSet(size_t size)
 } 
 
 TEST(HashTest, createCount) {
-    auto hash = createHashSet<std::string, ChainHashSet>(10);
+    auto hash = createHashSet<std::string, DoubleHashSet>(10);
 
     ASSERT_EQ(hash->count(), 0);
 
@@ -19,7 +18,7 @@ TEST(HashTest, createCount) {
 }
 
 TEST(HashTest, addCount) {
-    auto hash = createHashSet<std::string, ChainHashSet>(10);
+    auto hash = createHashSet<std::string, DoubleHashSet>(10);
 
     hash->add_item("Hello");
 
@@ -29,7 +28,7 @@ TEST(HashTest, addCount) {
 }
 
 TEST(HashTest, add_rmCount) {
-    auto hash = createHashSet<std::string, ChainHashSet>(10);
+    auto hash = createHashSet<std::string, DoubleHashSet>(10);
 
     hash->add_item("Hello");
     hash->remove_item("Hello");
@@ -40,7 +39,7 @@ TEST(HashTest, add_rmCount) {
 }
 
 TEST(HashTest, containing) {
-    auto hash = createHashSet<std::string, ChainHashSet>(10);
+    auto hash = createHashSet<std::string, DoubleHashSet>(10);
 
     hash->add_item("Hello");
     hash->add_item("World");
@@ -52,14 +51,14 @@ TEST(HashTest, containing) {
 }
 
 TEST(HashTest, capacity) {
-    auto hash = createHashSet<std::string, ChainHashSet>(10);
+    auto hash = createHashSet<std::string, DoubleHashSet>(10);
 
     ASSERT_EQ(hash->capacity(), 10);
     delete hash;  
 }
 
 TEST(HashTest, replace) {
-    auto hash = createHashSet<std::string, ChainHashSet>(10);
+    auto hash = createHashSet<std::string, DoubleHashSet>(10);
     hash->add_item("Hello");
     hash->add_item("World");
 
@@ -72,7 +71,7 @@ TEST(HashTest, replace) {
 }
 
 TEST(HashTest, for_each) {
-    auto hash = createHashSet<std::string, ChainHashSet>(10);
+    auto hash = createHashSet<std::string, DoubleHashSet>(10);
     hash->add_item("Hello");
     hash->add_item("World");
 
@@ -89,7 +88,7 @@ TEST(HashTest, for_each) {
 }
 
 TEST(HashTest, rehash) {
-    auto hash = createHashSet<std::string, ChainHashSet>(10);
+    auto hash = createHashSet<std::string, DoubleHashSet>(10);
     hash->add_item("Hello");
     hash->add_item("World");
 
@@ -104,7 +103,7 @@ TEST(HashTest, rehash) {
 }
 
 TEST(HashTest, copyconstr) {
-    auto hash = static_cast<Hash*>(createHashSet<std::string, ChainHashSet>(10));
+    auto hash = static_cast<Hash*>(createHashSet<std::string, DoubleHashSet>(10));
     
     hash->add_item("Hello");
     hash->add_item("World");
@@ -122,7 +121,7 @@ TEST(HashTest, copyconstr) {
 }
 
 TEST(HashTest, copyassign) {
-    auto hash = static_cast<Hash*>(createHashSet<std::string, ChainHashSet>(10));
+    auto hash = static_cast<Hash*>(createHashSet<std::string, DoubleHashSet>(10));
     
     hash->add_item("Hello");
     hash->add_item("World");
@@ -140,7 +139,7 @@ TEST(HashTest, copyassign) {
 }
 
 TEST(HashTest, moveconstr) {
-    auto hash = static_cast<Hash*>(createHashSet<std::string, ChainHashSet>(10));
+    auto hash = static_cast<Hash*>(createHashSet<std::string, DoubleHashSet>(10));
     
     hash->add_item("Hello");
     hash->add_item("World");
@@ -157,7 +156,7 @@ TEST(HashTest, moveconstr) {
 }
 
 TEST(HashTest, moveassign) {
-    auto hash = static_cast<Hash*>(createHashSet<std::string, ChainHashSet>(10));
+    auto hash = static_cast<Hash*>(createHashSet<std::string, DoubleHashSet>(10));
     
     hash->add_item("Hello");
     hash->add_item("World");
