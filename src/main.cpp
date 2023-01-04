@@ -54,23 +54,18 @@ int main() {
     // display(chash);
 
 
-    auto hash = createHashSet<std::string, ChainHashSet>(10);
+    auto hash = static_cast<Hash*>(createHashSet<std::string, ChainHashSet>(10));
     
     hash->add_item("Hello");
     hash->add_item("World");
 
-    auto chash(hash->clone());
+    auto chash(*hash);
     
-    // auto count = chash.count();
+    auto count = chash.capacity();
 
-    display(*static_cast<Hash*>(&chash));
+    display(chash);
     // auto count = hash->count();
 
-    // ASSERT_TRUE(chash.containing("Hello"));
-    // ASSERT_TRUE(chash.containing("World"));
-    // ASSERT_EQ(count, 2);
-    // ASSERT_EQ(chash.capacity(), 15);
-    
     delete hash;  
 
     return 0;

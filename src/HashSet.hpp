@@ -31,12 +31,6 @@ protected:
 public:
     virtual ~HashSet() = default;
     
-    HashSet clone() {
-        auto temp(*impl());
-        
-        return temp;
-    }
-
     void add_item(Key const& val) {
         impl()->add_item_impl(val);
     }

@@ -105,20 +105,71 @@ TEST(HashTest, rehash) {
 }
 
 TEST(HashTest, copyconstr) {
-    auto hash = createHashSet<std::string, ChainHashSet>(10);
+    auto hash = static_cast<Hash*>(createHashSet<std::string, ChainHashSet>(10));
     
     hash->add_item("Hello");
     hash->add_item("World");
 
     auto chash(*hash);
+    chash.rehash(15);
     
-    auto count = chash.count();
-    // auto count = hash->count();
+    ASSERT_TRUE(chash.containing("Hello"));
+    ASSERT_TRUE(chash.containing("World"));
+    ASSERT_EQ(chash.count(), 2);
+    ASSERT_EQ(chash.capacity(), 15);
+    ASSERT_EQ(hash->capacity(), 10);
+    
+    delete hash;  
+}
 
-    // ASSERT_TRUE(chash.containing("Hello"));
-    // ASSERT_TRUE(chash.containing("World"));
-    ASSERT_EQ(count, 2);
-    // ASSERT_EQ(chash.capacity(), 15);
+TEST(HashTest, copyassign) {
+    auto hash = static_cast<Hash*>(createHashSet<std::string, ChainHashSet>(10));
+    
+    hash->add_item("Hello");
+    hash->add_item("World");
+
+    auto chash = *hash;
+    chash.rehash(15);
+
+    ASSERT_TRUE(chash.containing("Hello"));
+    ASSERT_TRUE(chash.containing("World"));
+    ASSERT_EQ(chash.count(), 2);
+    ASSERT_EQ(chash.capacity(), 15);
+    ASSERT_EQ(hash->capacity(), 10);
+    
+    delete hash;  
+}
+
+TEST(HashTest, moveconstr) {
+    auto hash = static_cast<Hash*>(createHashSet<std::string, ChainHashSet>(10));
+    
+    hash->add_item("Hello");
+    hash->add_item("World");
+
+    auto chash(std::move(*hash));
+    
+    ASSERT_TRUE(chash.containing("Hello"));
+    ASSERT_TRUE(chash.containing("World"));
+    ASSERT_EQ(chash.count(), 2);
+    ASSERT_EQ(chash.capacity(), 10);
+    ASSERT_EQ(hash->capacity(), 0);
+    
+    delete hash;  
+}
+
+TEST(HashTest, moveassign) {
+    auto hash = static_cast<Hash*>(createHashSet<std::string, ChainHashSet>(10));
+    
+    hash->add_item("Hello");
+    hash->add_item("World");
+
+    auto chash = std::move(*hash);
+    
+    ASSERT_TRUE(chash.containing("Hello"));
+    ASSERT_TRUE(chash.containing("World"));
+    ASSERT_EQ(chash.count(), 2);
+    ASSERT_EQ(chash.capacity(), 10);
+    ASSERT_EQ(hash->capacity(), 0);
     
     delete hash;  
 }
