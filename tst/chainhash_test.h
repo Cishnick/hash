@@ -5,7 +5,7 @@ using Hash = ChainHashSet<std::string, Hash_Std>;
 
 
 template <class Key, template<class T, template<class U,class V> class HashFunc> class Type>
-HashSet<Type<Key, Hash_Std>, Key, Hash_Std>* createHashSet(size_t size) 
+HashSet<Type<Key, Hash_Std>, Key>* createHashSet(size_t size) 
 {
     return new Type<Key, Hash_Std>(size);
 } 

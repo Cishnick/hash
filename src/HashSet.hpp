@@ -1,26 +1,19 @@
 #pragma once
 #include <functional>
 
-template<class Impl, class Key, template<class U,class V> class HashFunc>
-class HashSet {
-protected:
-    using hash_t = size_t;
-    
+template<class Impl, class Key>
+class HashSet {    
 private:
-    using _HashFunc = HashFunc<Key, hash_t>;
 
     inline Impl* impl() {
         return static_cast<Impl*>(this);
-    }
+    }   
 
     inline const Impl* impl() const{
         return static_cast<const Impl*>(this);
     }
 
 protected:
-    hash_t hash_func(Key const &data) const {
-        return _HashFunc::get(data, capacity());
-    }
 
     HashSet() = default;
     HashSet(const HashSet& obj) = default;

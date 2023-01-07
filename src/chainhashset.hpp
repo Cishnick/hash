@@ -9,7 +9,7 @@
 #include "HashSet.hpp"
 
 template<class Key, template<class U,class V> class HashFunc>
-class ChainHashSet : public HashSet<ChainHashSet<Key, HashFunc>, Key, HashFunc>
+class ChainHashSet : public HashSet<ChainHashSet<Key, HashFunc>, Key>
 {
 private:
     ChainHashSet() :
@@ -17,6 +17,13 @@ private:
         _count(0),
         table(nullptr)
     {}
+
+    using hash_t = size_t;
+    using _HashFunc = HashFunc<Key, hash_t>;
+
+    hash_t hash_func(Key const &data) const {
+        return _HashFunc::get(data, this->capacity());
+    }
     
 public:    
     void swap(ChainHashSet& other) noexcept {
@@ -81,19 +88,19 @@ public:
 
     void add_item_impl(Key const &item) {
         _count++;
-        auto key = HashSet<ChainHashSet, Key, HashFunc>::hash_func(item);
+        auto key = hash_func(item);
         table[key].push_back(item);
     }
 
     void add_item_impl(Key && item) {
         _count++;
-        auto key = HashSet<ChainHashSet, Key, HashFunc>::hash_func(item);
+        auto key = hash_func(item);
         table[key].push_back(std::forward<Key>(item));
     }
 
     void remove_item_impl(Key const &item)  {
         _count--;
-        auto key = HashSet<ChainHashSet, Key, HashFunc>::hash_func(item);
+        auto key = hash_func(item);
         table[key].remove(item);
     }
 
@@ -113,7 +120,7 @@ public:
     }
 
     bool containing_impl(Key const &item) const {
-        auto key = HashSet<ChainHashSet, Key, HashFunc>::hash_func(item);
+        auto key = hash_func(item);
         auto chain = table[key];
         return std::find(chain.cbegin(), chain.cend(), item) != chain.cend();
     }

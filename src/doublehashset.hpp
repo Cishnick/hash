@@ -9,7 +9,7 @@
 #include "HashSet.hpp"
 
 template<class Key, template<class U,class V> class HashFunc>
-class DoubleHashSet : public HashSet<DoubleHashSet<Key, HashFunc>, Key, HashFunc>
+class DoubleHashSet : public HashSet<DoubleHashSet<Key, HashFunc>, Key>
 {
 private:
     DoubleHashSet() :
@@ -114,4 +114,5 @@ public:
 private:
     size_t _capacity;
     size_t _count;
+    Key* table;
 };
