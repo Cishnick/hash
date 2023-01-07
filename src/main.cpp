@@ -1,5 +1,6 @@
 #include <iostream>
 #include "chainhashset.hpp"
+#include "doublehashset.hpp"
 
 
 using Hash = ChainHashSet<std::string, Hash_Std>;
@@ -16,6 +17,17 @@ void display(Hash const& hash) {
     std::cout << "count: " << hash.count() << std::endl;
 }
 
+using DHash = DoubleHashSet<std::string, Hash_Std, Hash_Div>;
+
+void display(DHash const& hash) {
+    using namespace std;
+    for(int i = 0; i != hash._capacity; ++i) {
+        std::cout << i;
+        std::cout << ' ' << hash.table[i].data << ' ' << hash.table[i].deleted;
+        std::cout << std::endl;
+    }
+    std::cout << "count: " << hash.count() << std::endl;
+}
 
 template <class Key, template<class T, template<class U,class V> class HashFunc> class Type>
 HashSet<Type<Key, Hash_Std>, Key>* createHashSet(size_t size) 
@@ -54,19 +66,34 @@ int main() {
     // display(chash);
 
 
-    auto hash = static_cast<Hash*>(createHashSet<std::string, ChainHashSet>(10));
+    auto hash = new DoubleHashSet<std::string, Hash_Std, Hash_Div>(4);
     
     hash->add_item("Hello");
     hash->add_item("World");
 
-    auto chash(*hash);
-    
-    auto count = chash.capacity();
+    hash->replace("World", "People");
 
-    display(chash);
-    // auto count = hash->count();
+
+    // std::vector<std::string> strs{
+    //     "Hello world!", 
+    //     "Hello dlrow!", 
+    //     "Python is shit", 
+    //     "Linux Manjaro",
+    //     "Something else",
+    //     "First try in hash tables"
+    // };
+
+    // for(auto const& str : strs)
+    //     hash->add_item(str);
+
+    // hash->replace("Hello world!", "Hello world!!!");
+    auto chash(*hash);    
+
+    std::cout << "del: " << hash->containing("World") << std::endl;
 
     delete hash;  
+    display(chash);
+
 
     return 0;
 }

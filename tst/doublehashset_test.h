@@ -1,173 +1,168 @@
-// #include <gtest/gtest.h>
-// #include "../src/doublehashset.hpp"
+#include <gtest/gtest.h>
+#include "../src/doublehashset.hpp"
 
-// using Hash = DoubleHashSet<std::string, Hash_Std>;
+// using DHash = DoubleHashSet<std::string, Hash_Std, Hash_Div>;
 
-// template <class Key, template<class T, template<class U,class V> class HashFunc> class Type>
-// HashSet<Type<Key, Hash_Std>, Key>* createHashSet(size_t size) 
-// {
-//     return new Type<Key, Hash_Std>(size);
-// } 
 
-// TEST(HashTest, createCount) {
-//     auto hash = createHashSet<std::string, DoubleHashSet>(10);
+TEST(DoubleHashTest, createCount) {
+    auto hash = new DoubleHashSet<std::string, Hash_Std, Hash_Div>(5);
 
-//     ASSERT_EQ(hash->count(), 0);
+    ASSERT_EQ(hash->count(), 0);
 
-//     delete hash;
-// }
+    delete hash;
+}
 
-// TEST(HashTest, addCount) {
-//     auto hash = createHashSet<std::string, DoubleHashSet>(10);
+TEST(DoubleHashTest, addCount) {
+    auto hash = new DoubleHashSet<std::string, Hash_Std, Hash_Div>(5);
 
-//     hash->add_item("Hello");
+    hash->add_item("Hello");
 
-//     ASSERT_EQ(hash->count(), 1);
+    ASSERT_EQ(hash->count(), 1);
 
-//     delete hash;
-// }
+    delete hash;
+}
 
-// TEST(HashTest, add_rmCount) {
-//     auto hash = createHashSet<std::string, DoubleHashSet>(10);
+TEST(DoubleHashTest, add_rmCount) {
+    auto hash = new DoubleHashSet<std::string, Hash_Std, Hash_Div>(5);
 
-//     hash->add_item("Hello");
-//     hash->remove_item("Hello");
+    hash->add_item("Hello");
+    hash->remove_item("Hello");
 
-//     ASSERT_EQ(hash->count(), 0);
+    ASSERT_EQ(hash->count(), 0);
 
-//     delete hash;
-// }
+    delete hash;
+}
 
-// TEST(HashTest, containing) {
-//     auto hash = createHashSet<std::string, DoubleHashSet>(10);
+TEST(DoubleHashTest, containing) {
+    auto hash = new DoubleHashSet<std::string, Hash_Std, Hash_Div>(5);
 
-//     hash->add_item("Hello");
-//     hash->add_item("World");
+    hash->add_item("Hello");
+    hash->add_item("World");
 
-//     ASSERT_TRUE(hash->containing("World"));
-//     ASSERT_FALSE(hash->containing("I'm not existing"));  
+    ASSERT_TRUE(hash->containing("World"));
+    ASSERT_FALSE(hash->containing("I'm not existing"));  
 
-//     delete hash;  
-// }
+    delete hash;  
+}
 
-// TEST(HashTest, capacity) {
-//     auto hash = createHashSet<std::string, DoubleHashSet>(10);
+TEST(DoubleHashTest, capacity) {
+    auto hash = new DoubleHashSet<std::string, Hash_Std, Hash_Div>(5);
 
-//     ASSERT_EQ(hash->capacity(), 10);
-//     delete hash;  
-// }
+    ASSERT_EQ(hash->capacity(), 32);
+    delete hash;  
+}
 
-// TEST(HashTest, replace) {
-//     auto hash = createHashSet<std::string, DoubleHashSet>(10);
-//     hash->add_item("Hello");
-//     hash->add_item("World");
+TEST(DoubleHashTest, replace) {
+    auto hash = new DoubleHashSet<std::string, Hash_Std, Hash_Div>(5);
+    hash->add_item("Hello");
+    hash->add_item("World");
 
-//     hash->replace("World", "People");
+    hash->replace("World", "People");
     
-//     ASSERT_TRUE(hash->containing("People"));
-//     ASSERT_FALSE(hash->containing("World"));
+    ASSERT_TRUE(hash->containing("People"));
+    ASSERT_FALSE(hash->containing("World"));
 
-//     delete hash;  
-// }
+    delete hash;  
+}
 
-// TEST(HashTest, for_each) {
-//     auto hash = createHashSet<std::string, DoubleHashSet>(10);
-//     hash->add_item("Hello");
-//     hash->add_item("World");
+TEST(DoubleHashTest, for_each) {
+    auto hash = new DoubleHashSet<std::string, Hash_Std, Hash_Div>(5);
+    hash->add_item("Hello");
+    hash->add_item("World");
 
-//     hash->for_each([](std::string const& val) {
-//         return val + '1';
-//     });
+    hash->for_each([](std::string const& val) {
+        return val + '1';
+    });
     
-//     ASSERT_TRUE(hash->containing("Hello1"));
-//     ASSERT_TRUE(hash->containing("World1"));
-//     ASSERT_FALSE(hash->containing("Hello"));
-//     ASSERT_FALSE(hash->containing("World"));
+    ASSERT_TRUE(hash->containing("Hello1"));
+    ASSERT_TRUE(hash->containing("World1"));
+    ASSERT_FALSE(hash->containing("Hello"));
+    ASSERT_FALSE(hash->containing("World"));
     
-//     delete hash;  
-// }
+    delete hash;  
+}
 
-// TEST(HashTest, rehash) {
-//     auto hash = createHashSet<std::string, DoubleHashSet>(10);
-//     hash->add_item("Hello");
-//     hash->add_item("World");
+TEST(DoubleHashTest, rehash) {
+    auto hash = new DoubleHashSet<std::string, Hash_Std, Hash_Div>(5);
+    hash->add_item("Hello");
+    hash->add_item("World");
 
-//     hash->rehash(15);
+    hash->rehash(6);
     
-//     ASSERT_TRUE(hash->containing("Hello"));
-//     ASSERT_TRUE(hash->containing("World"));
-//     ASSERT_EQ(hash->count(), 2);
-//     ASSERT_EQ(hash->capacity(), 15);
+    ASSERT_TRUE(hash->containing("Hello"));
+    ASSERT_TRUE(hash->containing("World"));
+    ASSERT_EQ(hash->count(), 2);
+    ASSERT_EQ(hash->capacity(), 64);
     
-//     delete hash;  
-// }
+    delete hash;  
+}
 
-// TEST(HashTest, copyconstr) {
-//     auto hash = static_cast<Hash*>(createHashSet<std::string, DoubleHashSet>(10));
+TEST(DoubleHashTest, copyconstr) {
+    auto hash = new DoubleHashSet<std::string, Hash_Std, Hash_Div>(5);
     
-//     hash->add_item("Hello");
-//     hash->add_item("World");
+    hash->add_item("Hello");
+    hash->add_item("World");
 
-//     auto chash(*hash);
-//     chash.rehash(15);
+    auto chash(*hash);
+    chash.rehash(6);
     
-//     ASSERT_TRUE(chash.containing("Hello"));
-//     ASSERT_TRUE(chash.containing("World"));
-//     ASSERT_EQ(chash.count(), 2);
-//     ASSERT_EQ(chash.capacity(), 15);
-//     ASSERT_EQ(hash->capacity(), 10);
+    ASSERT_TRUE(chash.containing("Hello"));
+    ASSERT_TRUE(chash.containing("World"));
+    ASSERT_EQ(chash.count(), 2);
+    ASSERT_EQ(chash.capacity(), 64);
+    ASSERT_EQ(hash->capacity(), 32);
     
-//     delete hash;  
-// }
+    delete hash;  
+}
 
-// TEST(HashTest, copyassign) {
-//     auto hash = static_cast<Hash*>(createHashSet<std::string, DoubleHashSet>(10));
+TEST(DoubleHashTest, copyassign) {
+    auto hash = new DoubleHashSet<std::string, Hash_Std, Hash_Div>(5);
     
-//     hash->add_item("Hello");
-//     hash->add_item("World");
+    hash->add_item("Hello");
+    hash->add_item("World");
 
-//     auto chash = *hash;
-//     chash.rehash(15);
+    auto chash = *hash;
+    chash.rehash(6);
 
-//     ASSERT_TRUE(chash.containing("Hello"));
-//     ASSERT_TRUE(chash.containing("World"));
-//     ASSERT_EQ(chash.count(), 2);
-//     ASSERT_EQ(chash.capacity(), 15);
-//     ASSERT_EQ(hash->capacity(), 10);
+    ASSERT_TRUE(chash.containing("Hello"));
+    ASSERT_TRUE(chash.containing("World"));
+    ASSERT_EQ(chash.count(), 2);
+    ASSERT_EQ(chash.capacity(), 64);
+    ASSERT_EQ(hash->capacity(), 32);
     
-//     delete hash;  
-// }
+    delete hash;  
+}
 
-// TEST(HashTest, moveconstr) {
-//     auto hash = static_cast<Hash*>(createHashSet<std::string, DoubleHashSet>(10));
+TEST(DoubleHashTest, moveconstr) {
+    auto hash = new DoubleHashSet<std::string, Hash_Std, Hash_Div>(5);
     
-//     hash->add_item("Hello");
-//     hash->add_item("World");
+    hash->add_item("Hello");
+    hash->add_item("World");
 
-//     auto chash(std::move(*hash));
+    auto chash(std::move(*hash));
     
-//     ASSERT_TRUE(chash.containing("Hello"));
-//     ASSERT_TRUE(chash.containing("World"));
-//     ASSERT_EQ(chash.count(), 2);
-//     ASSERT_EQ(chash.capacity(), 10);
-//     ASSERT_EQ(hash->capacity(), 0);
+    ASSERT_TRUE(chash.containing("Hello"));
+    ASSERT_TRUE(chash.containing("World"));
+    ASSERT_EQ(chash.count(), 2);
+    ASSERT_EQ(chash.capacity(), 32);
+    ASSERT_EQ(hash->capacity(), 0);
     
-//     delete hash;  
-// }
+    delete hash;  
+}
 
-// TEST(HashTest, moveassign) {
-//     auto hash = static_cast<Hash*>(createHashSet<std::string, DoubleHashSet>(10));
+TEST(DoubleHashTest, moveassign) {
+    auto hash = new DoubleHashSet<std::string, Hash_Std, Hash_Div>(5);
     
-//     hash->add_item("Hello");
-//     hash->add_item("World");
+    hash->add_item("Hello");
+    hash->add_item("World");
 
-//     auto chash = std::move(*hash);
+    auto chash = std::move(*hash);
     
-//     ASSERT_TRUE(chash.containing("Hello"));
-//     ASSERT_TRUE(chash.containing("World"));
-//     ASSERT_EQ(chash.count(), 2);
-//     ASSERT_EQ(chash.capacity(), 10);
-//     ASSERT_EQ(hash->capacity(), 0);
+    ASSERT_TRUE(chash.containing("Hello"));
+    ASSERT_TRUE(chash.containing("World"));
+    ASSERT_EQ(chash.count(), 2);
+    ASSERT_EQ(chash.capacity(), 32);
+    ASSERT_EQ(hash->capacity(), 0);
     
-//     delete hash;  
-// }
+    delete hash;  
+}
